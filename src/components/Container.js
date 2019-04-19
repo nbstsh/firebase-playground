@@ -1,11 +1,11 @@
 import React from 'react'
-import SigninForm from './SigninForm'
+import AuthContainer from './AuthContainer'
 
 const Container = props => {
     return (
         <div className="Container">
             Container
-            <SigninForm />
+            <AuthContainer />
         </div>
     )   
 }
