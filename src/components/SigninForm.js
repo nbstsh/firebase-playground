@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Joi from 'joi'
-import firebase from '../utils/firebase-init'
+import { firebase, googleProvider } from '../utils/firebase-init'
 
 console.log(firebase)
 
@@ -10,11 +10,11 @@ const SigninForm = () => {
     const [errorMessage, setErrorMessage] = useState(null)
     const [successMessage, setSucessMessage] = useState(null)
 
-    const handleSuccess = () => {
+    const handleSuccess = (message) => {
         setErrorMessage('')
         setEmail('')
         setPassword('')
-        setSucessMessage('Successfully signed up!!!')
+        setSucessMessage(message)
     }
 
     const handleSubmit = async (e) => {
@@ -32,13 +32,39 @@ const SigninForm = () => {
         try {
             await firebase.auth().createUserWithEmailAndPassword(email, password)
             
-            handleSuccess()
+            handleSuccess('Successfully signed up!!!')
         }
         catch (e) {
             const errorCode = e.code;
             setErrorMessage(e.message)
             console.log({ errorCode, errorMessage })
         }         
+    }
+
+    const handleGoogleSigninClick = async () => {
+        const result = await firebase.auth().signInWithPopup(googleProvider)
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const token = result.credential.accessToken
+        // The signed-in user info.
+        const user = result.user
+
+        console.log({ token, user })
+
+        handleSuccess('Successfully signed in!!!')
+    }
+
+    const handleSignoutClick = async () => {
+        try {
+            await firebase.auth().signOut()
+            handleSuccess('Successfully signed out!!!')
+        }
+        catch (e) {
+            console.log(e)
+            setErrorMessage(e.message)
+        }
+        
+
     }
 
     return (
@@ -52,6 +78,14 @@ const SigninForm = () => {
             <input type='text' name='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
             <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
             <button>submit</button>
+            
+            <div>
+                <button type='button' onClick={handleGoogleSigninClick}>Google Sign in</button>
+            </div>
+
+            <div>
+                <button type='button' onClick={handleSignoutClick}>Sign out</button>
+            </div>
         </form>
     )
 }

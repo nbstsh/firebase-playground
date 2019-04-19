@@ -5,5 +5,7 @@ import 'firebase/auth'
 
 firebase.initializeApp(config.firebase)
 
+const googleProvider = new firebase.auth.GoogleAuthProvider()
 
-export default firebase 
+
+export {  firebase, googleProvider } 
