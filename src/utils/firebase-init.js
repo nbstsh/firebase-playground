@@ -5,7 +5,18 @@ import 'firebase/auth'
 
 firebase.initializeApp(config.firebase)
 
-const googleProvider = new firebase.auth.GoogleAuthProvider()
+
+// auth Observer
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        console.log('[onAuthStateChanged] User is signed in.')
+        console.log({user})
+    } else {
+        console.log('[onAuthStateChanged] User is signed out.')
+        console.log({user})
+    }
+})
 
 
-export {  firebase, googleProvider } 
+
+export {  firebase } 

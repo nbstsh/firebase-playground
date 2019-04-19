@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import Joi from 'joi'
-import { firebase, googleProvider } from '../utils/firebase-init'
+import { firebase } from '../utils/firebase-init'
 
-console.log(firebase)
+const googleProvider = new firebase.auth.GoogleAuthProvider()
 
 const SigninForm = () => {
     const [email, setEmail] = useState('')
@@ -54,6 +54,24 @@ const SigninForm = () => {
         handleSuccess('Successfully signed in!!!')
     }
 
+    const handleGoogleSigninWithRedirectClick = async () => {
+        await firebase.auth().signInWithRedirect(googleProvider)
+    }
+
+    const handleGetRedirectResultClick = async () => {
+        const result = await firebase.auth().getRedirectResult()
+        if (result.credential) {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const token = result.credential.accessToken
+            // ...
+            console.log({token})
+          }
+          // The signed-in user info.
+          const user = result.user
+
+          console.log({ user })
+    }
+
     const handleSignoutClick = async () => {
         try {
             await firebase.auth().signOut()
@@ -63,9 +81,14 @@ const SigninForm = () => {
             console.log(e)
             setErrorMessage(e.message)
         }
-        
-
     }
+
+    const handleLogCurrentUesrClick = () => {
+        const currentUser = firebase.auth().currentUser
+        console.log({currentUser})
+    }
+
+    const Button = ({handleClick, text}) => <div><button type='button' onClick={handleClick}>{text}</button></div>
 
     return (
         <form onSubmit={handleSubmit}>
@@ -75,17 +98,24 @@ const SigninForm = () => {
             {successMessage && 
                 <p style={{color: 'green'}}>{successMessage} </p>
             }
-            <input type='text' name='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
-            <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-            <button>submit</button>
-            
-            <div>
-                <button type='button' onClick={handleGoogleSigninClick}>Google Sign in</button>
-            </div>
 
+            {/* Email sign in */}
             <div>
-                <button type='button' onClick={handleSignoutClick}>Sign out</button>
+                <input type='text' name='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
+                <input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <button>submit</button>
             </div>
+            
+            {/* Google provider sign in */}
+            <Button handleClick={handleGoogleSigninClick} text='Google Sign in'/>
+            <Button handleClick={handleGoogleSigninWithRedirectClick} text='Google Sign in witt redirect'/>
+            <Button handleClick={handleGetRedirectResultClick} text='Get redirect result'/>
+
+            {/* Sign out */}
+            <Button handleClick={handleSignoutClick} text='Sign out'/>
+
+            {/* Get current user */}
+            <Button handleClick={handleLogCurrentUesrClick} text='log current user'/>
         </form>
     )
 }
