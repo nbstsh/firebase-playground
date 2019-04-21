@@ -20,6 +20,7 @@ const Header = ({ setActiveContainer, activeContainer}) => {
                     <NavItem statusName='auth' text='Auth' />
                     <NavItem statusName='storage' text='Storage' />
                     <NavItem statusName='realtimeDatabase' text='RealtimeDB' />
+                    <NavItem statusName='firestore' text='Firestore' />
                 </ul>
             </nav>
         </header>

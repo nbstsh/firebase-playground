@@ -3,6 +3,7 @@ import config from '../config/config'
 import 'firebase/auth'
 import 'firebase/storage'
 import 'firebase/database'
+import 'firebase/firestore'
 
 
 firebase.initializeApp(config.firebase)
@@ -21,4 +22,4 @@ firebase.auth().onAuthStateChanged((user) => {
 
 
 
-export {  firebase } 
+export { firebase } 

@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import Container from './components/Container'
 import Header from './components/Header'
+import './utils/firebase-init'
 
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      activeContainer: 'realtimeDatabase'
+      activeContainer: 'firestore'
     }
   }
   setActiveContainer = (activeContainer) => {
