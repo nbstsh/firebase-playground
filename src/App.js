@@ -7,7 +7,7 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      activeContainer: 'storage'
+      activeContainer: 'realtimeDatabase'
     }
   }
   setActiveContainer = (activeContainer) => {

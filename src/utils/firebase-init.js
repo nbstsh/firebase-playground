@@ -2,6 +2,7 @@ import firebase from 'firebase/app'
 import config from '../config/config'
 import 'firebase/auth'
 import 'firebase/storage'
+import 'firebase/database'
 
 
 firebase.initializeApp(config.firebase)

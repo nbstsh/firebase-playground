@@ -1,0 +1,28 @@
+.RealtimeDatabaseContainer {
+
+    h1 {
+        display: block;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    pre {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        list-style: square;
+    }
+
+    & li {
+        padding-bottom: 1rem;
+    }
+}
+
