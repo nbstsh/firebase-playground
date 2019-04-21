@@ -1,0 +1,20 @@
+.Header {
+    max-width: 120rem;
+    background-color: rgb(221, 221, 221);
+    padding: 2rem;
+}
+
+.Header ul {
+    display: flex;
+    list-style-type: none;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.Header li {
+    padding: 1rem;
+}
+
+.Header li.active {
+    background-color: white;
+}

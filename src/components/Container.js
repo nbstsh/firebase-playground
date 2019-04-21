@@ -1,10 +1,15 @@
 import React from 'react'
 import AuthContainer from './AuthContainer'
+import StorageContainer from './Storage/StorageContainer'
 
-const Container = props => {
+const Container = ({ activeContainer }) => {
+    const containers = {
+        auth: <AuthContainer />,
+        storage: <StorageContainer />
+    }
     return (
         <div className="Container">
-            <AuthContainer />
+            {containers[activeContainer]}
         </div>
     )   
 }

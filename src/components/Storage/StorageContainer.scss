@@ -1,0 +1,30 @@
+.StorageContainer {
+
+    & > h1 {
+        display: block;
+        margin: 0 auto;
+        text-align: center;
+        padding: 2rem;
+    }
+}
+
+
+.FileUpload {
+    background-color: rgb(243, 243, 243);
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & > * {
+        width: 80%;
+        height: 2.5rem;
+    }
+
+    progress {
+        margin-bottom: 2rem;
+        appearance: none;
+    }
+
+}
+
