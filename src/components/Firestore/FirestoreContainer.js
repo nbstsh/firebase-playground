@@ -3,6 +3,7 @@ import './Firestore.scss'
 import firebase from 'firebase'
 import Users from './Users';
 import ChatRoom from './ChatRoom';
+import Cities from './Cities';
 
 class FirestoreContainer extends Component {
     constructor() {
@@ -17,6 +18,7 @@ class FirestoreContainer extends Component {
                 <h1>Cloud Firestore</h1>
                 <Users />
                 <ChatRoom />
+                <Cities />
             </div>
         )
     }
